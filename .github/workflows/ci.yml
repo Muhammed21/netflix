@@ -8,6 +8,10 @@ on:
 jobs:
   quality:
     runs-on: ubuntu-latest
+    env:
+      # Valeur factice : le `postinstall: prisma generate` d'apps/api doit pouvoir
+      # résoudre sa config. Aucune connexion à une base réelle n'est établie.
+      DATABASE_URL: postgresql://user:password@localhost:5432/db
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
