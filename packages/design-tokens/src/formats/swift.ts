@@ -184,21 +184,44 @@ export const formatDimensions = (
   return [GENERATED_HEADER, `public enum ${namespace} {`, ...members, "}", ""].join("\n");
 };
 
-type TypographyValue = {
-  readonly fontFamily: string;
-  readonly fontSize: unknown;
-  readonly fontWeight: unknown;
-  readonly lineHeight: unknown;
+// SwiftUI n'expose que ces text styles. Les cibler plutôt que des tailles en dur
+// donne le Dynamic Type gratuitement — et c'est l'intention du fichier Figma, dont
+// le seul style nommé est « SF / Subheadline - Semibold ».
+const IOS_TEXT_STYLES = new Set([
+  "largeTitle",
+  "title",
+  "title2",
+  "title3",
+  "headline",
+  "subheadline",
+  "body",
+  "callout",
+  "footnote",
+  "caption",
+  "caption2",
+]);
+
+type TextStyleValue = {
+  readonly textStyle: string;
+  readonly fontWeight?: unknown;
 };
 
-const asTypography = (value: unknown, path: readonly string[]): TypographyValue => {
+const asTextStyle = (value: unknown, path: readonly string[]): TextStyleValue => {
   assertResolved(value, path);
 
-  if (typeof value !== "object" || value === null) {
-    throw new Error(`Token "${tokenId(path)}" is not a composite typography value.`);
+  if (typeof value !== "object" || value === null || !("textStyle" in value)) {
+    throw new Error(`Token "${tokenId(path)}" is not an iOS text style value.`);
   }
 
-  return value as TypographyValue;
+  const { textStyle } = value as TextStyleValue;
+
+  if (!IOS_TEXT_STYLES.has(textStyle)) {
+    throw new Error(
+      `Token "${tokenId(path)}" uses "${textStyle}", which SwiftUI does not provide as a text style.`,
+    );
+  }
+
+  return value as TextStyleValue;
 };
 
 const toFontWeight = (value: unknown, path: readonly string[]): string => {
@@ -211,31 +234,24 @@ const toFontWeight = (value: unknown, path: readonly string[]): string => {
   return weight;
 };
 
-export const formatTypography = (tokens: readonly DesignToken[]): string => {
-  const fonts = tokens.flatMap((token) => {
-    const typography = asTypography(token.value, token.path);
+export const formatTextStyles = (tokens: readonly DesignToken[]): string => {
+  const members = tokens.flatMap((token) => {
+    const { textStyle, fontWeight } = asTextStyle(token.value, token.path);
+    const name = swiftMemberName(token.path);
 
-    return [
-      ...docComment(token),
-      `    static let ${swiftMemberName(token.path)} = Font.custom("${typography.fontFamily}", size: ${toPoints(typography.fontSize, token.path)}).weight(.${toFontWeight(typography.fontWeight, token.path)})`,
-    ];
+    // Un token nommé `body` ou `headline` masquerait la propriété SwiftUI du même
+    // nom : `.font(.body)` se résoudrait alors silencieusement vers le token, sans
+    // que le compilateur signale l'ambiguïté. On refuse plutôt que de piéger l'app.
+    if (IOS_TEXT_STYLES.has(name)) {
+      throw new Error(
+        `Token "${tokenId(token.path)}" maps to "${name}", which would shadow the SwiftUI Font member of the same name.`,
+      );
+    }
+    const weight =
+      fontWeight === undefined ? "" : `.weight(.${toFontWeight(fontWeight, token.path)})`;
+
+    return [...docComment(token), `    static let ${name} = Font.${textStyle}${weight}`];
   });
 
-  const lineHeights = tokens.map((token) => {
-    const typography = asTypography(token.value, token.path);
-
-    return `    public static let ${swiftMemberName(token.path)}: CGFloat = ${toPoints(typography.lineHeight, token.path)}`;
-  });
-
-  return [
-    GENERATED_HEADER,
-    "public extension Font {",
-    ...fonts,
-    "}",
-    "",
-    "public enum LineHeight {",
-    ...lineHeights,
-    "}",
-    "",
-  ].join("\n");
+  return [GENERATED_HEADER, "public extension Font {", ...members, "}", ""].join("\n");
 };

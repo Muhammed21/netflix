@@ -4,11 +4,23 @@
 import SwiftUI
 
 public extension Color {
-    static let backgroundPrimary = Color(.sRGB, red: 0.078, green: 0.078, blue: 0.078, opacity: 1)
-    static let backgroundElevated = Color(.sRGB, red: 0, green: 0, blue: 0, opacity: 1)
-    static let backgroundScrim = Color(.sRGB, red: 0, green: 0, blue: 0, opacity: 0.6)
+    static let backgroundPrimary = Color(.sRGB, red: 0, green: 0, blue: 0, opacity: 1)
+    static let backgroundElevated = Color(.sRGB, red: 0.071, green: 0.071, blue: 0.071, opacity: 1)
+    static let backgroundSubtle = Color(.sRGB, red: 0.259, green: 0.259, blue: 0.259, opacity: 1)
+    static let backgroundMuted = Color(.sRGB, red: 0.306, green: 0.29, blue: 0.29, opacity: 1)
+    static let backgroundPlaceholder = Color(.sRGB, red: 0.769, green: 0.769, blue: 0.769, opacity: 1)
+    static let backgroundInverse = Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 1)
     static let textPrimary = Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 1)
-    static let textSecondary = Color(.sRGB, red: 0.502, green: 0.502, blue: 0.502, opacity: 1)
+    static let textSecondary = Color(.sRGB, red: 0.549, green: 0.529, blue: 0.529, opacity: 1)
+    static let textPlaceholder = Color(.sRGB, red: 0.769, green: 0.769, blue: 0.769, opacity: 1)
+    static let textOnInverse = Color(.sRGB, red: 0, green: 0, blue: 0, opacity: 1)
+    static let textEmphasisHigh = Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.929)
+    static let textEmphasisMedium = Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.831)
+    static let textEmphasisLow = Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.69)
+    static let textEmphasisFaint = Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 0.478)
     static let actionPrimary = Color(.sRGB, red: 0.898, green: 0.035, blue: 0.078, opacity: 1)
-    static let actionPrimaryPressed = Color(.sRGB, red: 0.698, green: 0.027, blue: 0.063, opacity: 1)
+    static let actionPrimaryPressed = Color(.sRGB, red: 0.694, green: 0.024, blue: 0.059, opacity: 1)
+    static let actionLink = Color(.sRGB, red: 0, green: 0.443, blue: 0.922, opacity: 1)
+    static let brandNetflix = Color(.sRGB, red: 0.898, green: 0.035, blue: 0.078, opacity: 1)
+    static let brandFacebook = Color(.sRGB, red: 0.224, green: 0.318, blue: 0.522, opacity: 1)
 }

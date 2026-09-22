@@ -5,10 +5,13 @@
     "sm": { "$type": "dimension", "$value": "{core.dimension.100}" },
     "md": { "$type": "dimension", "$value": "{core.dimension.200}" },
     "lg": { "$type": "dimension", "$value": "{core.dimension.300}" },
-    "xl": { "$type": "dimension", "$value": "{core.dimension.400}" }
+    "xl": { "$type": "dimension", "$value": "{core.dimension.400}" },
+    "xxl": { "$type": "dimension", "$value": "{core.dimension.600}" }
   },
   "radius": {
-    "sm": { "$type": "dimension", "$value": "{core.dimension.50}" },
-    "md": { "$type": "dimension", "$value": "{core.dimension.100}" }
+    "sm": { "$type": "dimension", "$value": "{core.dimension.25}" },
+    "md": { "$type": "dimension", "$value": "{core.dimension.100}" },
+    "lg": { "$type": "dimension", "$value": "{core.dimension.250}" },
+    "full": { "$type": "dimension", "$value": "{core.dimension.full}" }
   }
 }

@@ -1,25 +1,77 @@
 {
   "core": {
     "color": {
+      "neutral": {
+        "0": {
+          "$type": "color",
+          "$value": "#000000",
+          "$description": "Fond des écrans et des barres. 56 usages dans le fichier Figma."
+        },
+        "10": {
+          "$type": "color",
+          "$value": "#121212",
+          "$description": "Surfaces surélevées : cartes, rangées. 30 usages."
+        },
+        "30": {
+          "$type": "color",
+          "$value": "#424242",
+          "$description": "Séparateurs et remplissages discrets. 13 usages."
+        },
+        "35": {
+          "$type": "color",
+          "$value": "#4e4a4a",
+          "$description": "Placeholders de vignettes. 21 usages."
+        },
+        "60": {
+          "$type": "color",
+          "$value": "#8c8787",
+          "$description": "Gris de texte secondaire. 106 usages."
+        },
+        "80": {
+          "$type": "color",
+          "$value": "#c4c4c4",
+          "$description": "Gris clair : champs de recherche, placeholders. 24 usages."
+        },
+        "90": { "$type": "color", "$value": "#e0e0e0" },
+        "100": {
+          "$type": "color",
+          "$value": "#ffffff",
+          "$description": "Blanc pur. 537 usages, la couleur la plus fréquente du fichier."
+        }
+      },
+      "whiteAlpha": {
+        "93": { "$type": "color", "$value": "#ffffffed" },
+        "83": { "$type": "color", "$value": "#ffffffd4" },
+        "69": { "$type": "color", "$value": "#ffffffb0" },
+        "48": { "$type": "color", "$value": "#ffffff7a" }
+      },
       "red": {
+        "50": {
+          "$type": "color",
+          "$value": "#db202c",
+          "$description": "Variante claire, vue sur les écrans LOGO."
+        },
         "60": {
           "$type": "color",
           "$value": "#e50914",
-          "$description": "Rouge de marque primaire."
+          "$description": "Rouge de marque Netflix. 28 usages."
         },
-        "70": { "$type": "color", "$value": "#b20710" }
-      },
-      "neutral": {
-        "0": { "$type": "color", "$value": "#000000" },
-        "10": { "$type": "color", "$value": "#141414" },
-        "60": { "$type": "color", "$value": "#808080" },
-        "100": { "$type": "color", "$value": "#ffffff" }
-      },
-      "transparent": {
-        "scrim": {
+        "70": {
           "$type": "color",
-          "$value": "#00000099",
-          "$description": "Noir a 60% d'opacite."
+          "$value": "#b1060f",
+          "$description": "Rouge foncé des états actifs. 24 usages."
+        }
+      },
+      "blue": {
+        "50": {
+          "$type": "color",
+          "$value": "#0071eb",
+          "$description": "Bleu d'action secondaire."
+        },
+        "70": {
+          "$type": "color",
+          "$value": "#395185",
+          "$description": "Bleu de marque Facebook, écran de partage."
         }
       }
     }

@@ -1,6 +1,6 @@
 import type { Format, TransformedToken } from "style-dictionary/types";
 
-import { formatColors, formatDimensions, formatTypography, type DesignToken } from "./swift.ts";
+import { formatColors, formatDimensions, formatTextStyles, type DesignToken } from "./swift.ts";
 
 const toDesignToken = (token: TransformedToken): DesignToken => ({
   path: token.path,
@@ -22,9 +22,9 @@ export const swiftDimensionFormat: Format = {
     }),
 };
 
-export const swiftTypographyFormat: Format = {
-  name: "swift/typography",
-  format: ({ dictionary }) => formatTypography(dictionary.allTokens.map(toDesignToken)),
+export const swiftTextStyleFormat: Format = {
+  name: "swift/text-styles",
+  format: ({ dictionary }) => formatTextStyles(dictionary.allTokens.map(toDesignToken)),
 };
 
-export const swiftFormats = [swiftColorFormat, swiftDimensionFormat, swiftTypographyFormat];
+export const swiftFormats = [swiftColorFormat, swiftDimensionFormat, swiftTextStyleFormat];

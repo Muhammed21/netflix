@@ -36,7 +36,7 @@ export const config: Config = {
         },
         {
           destination: "Typography+Tokens.swift",
-          format: "swift/typography",
+          format: "swift/text-styles",
           filter: category("typography"),
         },
       ],

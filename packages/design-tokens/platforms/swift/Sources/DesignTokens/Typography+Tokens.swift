@@ -4,13 +4,22 @@
 import SwiftUI
 
 public extension Font {
-    static let bodyRegular = Font.custom("Inter", size: 17).weight(.regular)
-    static let captionMedium = Font.custom("Inter", size: 14).weight(.medium)
-    static let titleBold = Font.custom("Inter", size: 28).weight(.bold)
-}
-
-public enum LineHeight {
-    public static let bodyRegular: CGFloat = 24
-    public static let captionMedium: CGFloat = 20
-    public static let titleBold: CGFloat = 34
+    /// Titres d'écran pleine largeur (Coming Soon, Downloads).
+    static let screenTitle = Font.largeTitle.weight(.bold)
+    /// En-têtes de rangées (Popular on Netflix, Trending Now).
+    static let sectionTitle = Font.title3.weight(.semibold)
+    /// Titre d'une fiche ou d'une vignette.
+    static let cardTitle = Font.headline.weight(.bold)
+    /// Seul style nommé du fichier Figma : « SF / Subheadline - Semibold ».
+    static let cardSubtitle = Font.subheadline.weight(.semibold)
+    /// Corps de texte courant : synopsis, descriptions.
+    static let bodyText = Font.body.weight(.regular)
+    /// Libellés de boutons (Play, Download, My List).
+    static let buttonLabel = Font.callout.weight(.medium)
+    /// Métadonnées : durée, année, classification.
+    static let metadata = Font.footnote.weight(.regular)
+    /// Mentions légales et libellés secondaires.
+    static let captionLabel = Font.caption.weight(.regular)
+    /// Libellés de la barre d'onglets (Home, Search, Coming Soon, More).
+    static let tabLabel = Font.caption2.weight(.medium)
 }

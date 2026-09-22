@@ -1,31 +1,49 @@
 {
   "typography": {
-    "bodyRegular": {
-      "$type": "typography",
-      "$value": {
-        "fontFamily": "{core.font.family.sans}",
-        "fontSize": "{core.font.size.200}",
-        "fontWeight": "{core.font.weight.regular}",
-        "lineHeight": "{core.font.lineHeight.200}"
-      }
+    "screenTitle": {
+      "$type": "iosTextStyle",
+      "$value": { "textStyle": "largeTitle", "fontWeight": 700 },
+      "$description": "Titres d'écran pleine largeur (Coming Soon, Downloads)."
     },
-    "captionMedium": {
-      "$type": "typography",
-      "$value": {
-        "fontFamily": "{core.font.family.sans}",
-        "fontSize": "{core.font.size.100}",
-        "fontWeight": "{core.font.weight.medium}",
-        "lineHeight": "{core.font.lineHeight.100}"
-      }
+    "sectionTitle": {
+      "$type": "iosTextStyle",
+      "$value": { "textStyle": "title3", "fontWeight": 600 },
+      "$description": "En-têtes de rangées (Popular on Netflix, Trending Now)."
     },
-    "titleBold": {
-      "$type": "typography",
-      "$value": {
-        "fontFamily": "{core.font.family.sans}",
-        "fontSize": "{core.font.size.400}",
-        "fontWeight": "{core.font.weight.bold}",
-        "lineHeight": "{core.font.lineHeight.400}"
-      }
+    "cardTitle": {
+      "$type": "iosTextStyle",
+      "$value": { "textStyle": "headline", "fontWeight": 700 },
+      "$description": "Titre d'une fiche ou d'une vignette."
+    },
+    "cardSubtitle": {
+      "$type": "iosTextStyle",
+      "$value": { "textStyle": "subheadline", "fontWeight": 600 },
+      "$description": "Seul style nommé du fichier Figma : « SF / Subheadline - Semibold »."
+    },
+    "bodyText": {
+      "$type": "iosTextStyle",
+      "$value": { "textStyle": "body", "fontWeight": 400 },
+      "$description": "Corps de texte courant : synopsis, descriptions."
+    },
+    "buttonLabel": {
+      "$type": "iosTextStyle",
+      "$value": { "textStyle": "callout", "fontWeight": 500 },
+      "$description": "Libellés de boutons (Play, Download, My List)."
+    },
+    "metadata": {
+      "$type": "iosTextStyle",
+      "$value": { "textStyle": "footnote", "fontWeight": 400 },
+      "$description": "Métadonnées : durée, année, classification."
+    },
+    "captionLabel": {
+      "$type": "iosTextStyle",
+      "$value": { "textStyle": "caption", "fontWeight": 400 },
+      "$description": "Mentions légales et libellés secondaires."
+    },
+    "tabLabel": {
+      "$type": "iosTextStyle",
+      "$value": { "textStyle": "caption2", "fontWeight": 500 },
+      "$description": "Libellés de la barre d'onglets (Home, Search, Coming Soon, More)."
     }
   }
 }
