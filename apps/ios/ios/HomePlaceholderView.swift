@@ -5,7 +5,7 @@ import SwiftUI
 /// Accueil provisoire : matérialise la fin du parcours en attendant l'écran
 /// d'accueil réel.
 struct HomePlaceholderView: View {
-  let user: AuthenticatedUser
+  let profile: Profile
 
   var body: some View {
     ZStack {
@@ -16,7 +16,7 @@ struct HomePlaceholderView: View {
         Text("Accueil")
           .font(.screenTitle)
           .foregroundStyle(Color.textPrimary)
-        Text(user.email)
+        Text(profile.name)
           .font(.metadata)
           .foregroundStyle(Color.textSecondary)
       }
@@ -26,6 +26,6 @@ struct HomePlaceholderView: View {
 
 #Preview {
   HomePlaceholderView(
-    user: AuthenticatedUser(id: "1", email: "viewer@netflix.test", name: "Viewer")
+    profile: Profile(id: "1", name: "Profil 1", avatar: .blue, isKids: false, position: 0)
   )
 }

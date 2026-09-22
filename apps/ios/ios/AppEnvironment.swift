@@ -11,4 +11,5 @@ enum AppEnvironment {
   }
 
   static let authClient: AuthClient = HTTPAuthClient(baseURL: apiBaseURL)
+  static let profileClient: ProfileClient = HTTPProfileClient(baseURL: apiBaseURL)
 }

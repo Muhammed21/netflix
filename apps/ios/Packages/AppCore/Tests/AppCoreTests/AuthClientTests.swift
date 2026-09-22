@@ -6,10 +6,10 @@ import Testing
 @Suite("AuthClient contract")
 struct AuthClientTests {
   @Test("a fresh client has nobody signed in")
-  func noSessionInitially() async {
+  func noSessionInitially() async throws {
     let client = InMemoryAuthClient()
 
-    #expect(await client.currentUser() == nil)
+    #expect(try await client.currentUser() == nil)
   }
 
   @Test("signing in with the right password returns the user")
@@ -26,7 +26,7 @@ struct AuthClientTests {
     let client = InMemoryAuthClient()
     _ = try await client.signIn(email: "viewer@netflix.test", password: "motdepasse8")
 
-    #expect(await client.currentUser() != nil)
+    #expect(try await client.currentUser() != nil)
   }
 
   @Test("a wrong password surfaces as invalid credentials")
@@ -54,6 +54,28 @@ struct AuthClientTests {
 
     await client.signOut()
 
-    #expect(await client.currentUser() == nil)
+    #expect(try await client.currentUser() == nil)
+  }
+}
+
+@Suite("Session resolution")
+struct SessionResolutionTests {
+  /// Distinguer « pas de session » d'« impossible de savoir » : sans ça, une
+  /// panne réseau au démarrage déconnecterait visuellement un utilisateur qui
+  /// est en réalité toujours connecté.
+  @Test("no session resolves to nil, not to an error")
+  func noSession() async throws {
+    let client = InMemoryAuthClient()
+
+    #expect(try await client.currentUser() == nil)
+  }
+
+  @Test("an unreachable server throws instead of pretending nobody is signed in")
+  func unreachableDoesNotLookLikeSignedOut() async {
+    let client = InMemoryAuthClient(failure: .unreachable)
+
+    await #expect(throws: AuthError.unreachable) {
+      try await client.currentUser()
+    }
   }
 }

@@ -39,12 +39,12 @@ struct HTTPAuthClientIntegrationTests {
       session: URLSession(configuration: .ephemeral)
     )
 
-    #expect(await scoped.currentUser() == nil)
+    #expect(try await scoped.currentUser() == nil)
     _ = try await scoped.signIn(email: "viewer@netflix.test", password: "motdepasse8")
-    #expect(await scoped.currentUser() != nil)
+    #expect(try await scoped.currentUser() != nil)
 
     await scoped.signOut()
-    #expect(await scoped.currentUser() == nil)
+    #expect(try await scoped.currentUser() == nil)
   }
 
   @Test("an unreachable server is distinct from bad credentials")
@@ -54,5 +54,32 @@ struct HTTPAuthClientIntegrationTests {
     await #expect(throws: AuthError.unreachable) {
       try await offline.signIn(email: "viewer@netflix.test", password: "motdepasse8")
     }
+  }
+
+  @Test("the profiles endpoint is refused without a session and served with one")
+  func profilesRequireASession() async throws {
+    let configuration = URLSessionConfiguration.ephemeral
+    let anonymous = HTTPProfileClient(
+      baseURL: URL(string: "http://localhost:3001")!,
+      session: URLSession(configuration: configuration)
+    )
+
+    await #expect(throws: AuthError.invalidCredentials) {
+      try await anonymous.profiles()
+    }
+
+    let session = URLSession(configuration: .ephemeral)
+    let auth = HTTPAuthClient(baseURL: URL(string: "http://localhost:3001")!, session: session)
+    _ = try await auth.signIn(email: "viewer@netflix.test", password: "motdepasse8")
+
+    let signedIn = HTTPProfileClient(
+      baseURL: URL(string: "http://localhost:3001")!,
+      session: session
+    )
+    let profiles = try await signedIn.profiles()
+
+    #expect(profiles.count == 4)
+    #expect(profiles.map(\.position) == [0, 1, 2, 3])
+    #expect(profiles.last?.isKids == true)
   }
 }

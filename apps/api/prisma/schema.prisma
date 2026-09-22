@@ -18,6 +18,7 @@ model User {
   updatedAt     DateTime  @db.Timestamptz(3)
   sessions      Session[]
   accounts      Account[]
+  profiles      Profile[]
 
   @@map("user")
 }
@@ -67,4 +68,29 @@ model Verification {
 
   @@index([identifier], map: "verification_identifier_idx")
   @@map("verification")
+}
+
+/// Visuels d'avatar embarqués par l'app. Une énumération plutôt qu'une URL :
+/// le client ne peut afficher que ce qu'il embarque, l'API n'a donc aucune
+/// raison de servir des binaires.
+enum AvatarStyle {
+  BLUE
+  YELLOW
+  RED
+  KIDS
+}
+
+model Profile {
+  id        String      @id @default(cuid())
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  name      String
+  avatar    AvatarStyle
+  isKids    Boolean     @default(false)
+  position  Int
+  createdAt DateTime    @default(now()) @db.Timestamptz(3)
+
+  @@unique([userId, position], map: "profile_userId_position_key")
+  @@index([userId], map: "profile_userId_idx")
+  @@map("profile")
 }

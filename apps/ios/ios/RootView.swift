@@ -9,11 +9,14 @@ struct RootView: View {
     case splash
     case onboarding
     case signIn
-    case home(AuthenticatedUser)
+    case profileSelection
+    case home(Profile)
+    case startupFailed(String)
   }
 
   let storage: OnboardingStorage
   let client: AuthClient
+  let profileClient: ProfileClient
 
   @State private var step: Step = .splash
 
@@ -27,9 +30,17 @@ struct RootView: View {
       case .onboarding:
         OnboardingView(onFinish: completeOnboarding)
       case .signIn:
-        SignInView(client: client, onSignedIn: { step = .home($0) })
-      case .home(let user):
-        HomePlaceholderView(user: user)
+        SignInView(client: client, onSignedIn: { _ in step = .profileSelection })
+      case .profileSelection:
+        ProfileSelectionView(
+          client: profileClient,
+          onSelect: { step = .home($0) },
+          onSessionExpired: { step = .signIn }
+        )
+      case .home(let profile):
+        HomePlaceholderView(profile: profile)
+      case .startupFailed(let message):
+        StartupFailureView(message: message) { Task { await resolveSession() } }
       }
     }
     .animation(.easeInOut(duration: 0.4), value: step)
@@ -52,16 +63,25 @@ struct RootView: View {
   /// Le cookie de session est conservé par URLSession entre les lancements ;
   /// on demande au serveur s'il tient toujours plutôt que de le supposer.
   private func resolveSession() async {
-    if let user = await client.currentUser() {
-      step = .home(user)
-    } else {
-      step = .signIn
+    do {
+      // Le choix du profil est redemandé à chaque lancement, comme chez
+      // Netflix : il n'a pas à être persisté.
+      step = try await client.currentUser() == nil ? .signIn : .profileSelection
+    } catch {
+      // Une panne réseau n'est pas une déconnexion : afficher l'écran de
+      // connexion ferait croire à l'utilisateur qu'il a été déconnecté, et il
+      // saisirait ses identifiants pour rien.
+      step = .startupFailed(error.message)
     }
   }
 }
 
 #Preview("Premier lancement") {
-  RootView(storage: InMemoryOnboardingStorage(), client: InMemoryAuthClient())
+  RootView(
+    storage: InMemoryOnboardingStorage(),
+    client: InMemoryAuthClient(),
+    profileClient: InMemoryProfileClient()
+  )
 }
 
 #Preview("Session active") {
@@ -69,6 +89,9 @@ struct RootView: View {
     storage: InMemoryOnboardingStorage(hasCompletedOnboarding: true),
     client: InMemoryAuthClient(
       signedInAs: AuthenticatedUser(id: "1", email: "viewer@netflix.test", name: "Viewer")
-    )
+    ),
+    profileClient: InMemoryProfileClient(profiles: [
+      Profile(id: "1", name: "Profil 1", avatar: .blue, isKids: false, position: 0)
+    ])
   )
 }

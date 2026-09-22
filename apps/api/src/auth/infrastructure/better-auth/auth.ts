@@ -3,6 +3,13 @@ import { betterAuth, type BetterAuthOptions } from "better-auth";
 
 import { PrismaService } from "@db/prisma.service.js";
 
+const DEFAULT_PROFILES = [
+  { name: "Profil 1", avatar: "BLUE", isKids: false, position: 0 },
+  { name: "Profil 2", avatar: "YELLOW", isKids: false, position: 1 },
+  { name: "Profil 3", avatar: "RED", isKids: false, position: 2 },
+  { name: "Enfants", avatar: "KIDS", isKids: true, position: 3 },
+] as const;
+
 const buildAuthOptions = (prisma: PrismaService): BetterAuthOptions =>
   ({
     baseURL: process.env.BETTER_AUTH_URL,
@@ -12,6 +19,20 @@ const buildAuthOptions = (prisma: PrismaService): BetterAuthOptions =>
     }),
     emailAndPassword: {
       enabled: true,
+    },
+    databaseHooks: {
+      user: {
+        create: {
+          // Un compte sans profil arriverait sur une grille vide : le jeu par
+          // défaut est créé au même moment que l'utilisateur. Les comptes
+          // antérieurs ont été rattrapés par la migration `profiles`.
+          after: async (user) => {
+            await prisma.profile.createMany({
+              data: DEFAULT_PROFILES.map((profile) => ({ ...profile, userId: user.id })),
+            });
+          },
+        },
+      },
     },
     session: {
       cookieCache: {

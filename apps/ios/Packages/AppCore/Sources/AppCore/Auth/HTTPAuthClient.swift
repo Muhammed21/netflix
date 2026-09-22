@@ -51,20 +51,29 @@ public struct HTTPAuthClient: AuthClient {
     return decoded.user
   }
 
-  /// Renvoie `nil` plutôt que de lever : au démarrage, l'absence de session est
-  /// un cas nominal, pas une panne.
-  public func currentUser() async -> AuthenticatedUser? {
+  /// L'absence de session est un cas nominal et renvoie `nil` ; une panne de
+  /// transport lève, pour que l'appelant ne la confonde pas avec une
+  /// déconnexion.
+  public func currentUser() async throws(AuthError) -> AuthenticatedUser? {
     let request = URLRequest(url: baseURL.appending(path: "auth/session"))
 
-    guard let (data, response) = try? await session.data(for: request),
-      let status = (response as? HTTPURLResponse)?.statusCode,
-      (200..<300).contains(status),
-      let decoded = try? JSONDecoder().decode(SessionResponse.self, from: data)
-    else {
-      return nil
+    let data: Data
+    let response: URLResponse
+    do {
+      (data, response) = try await session.data(for: request)
+    } catch {
+      throw AuthError.unreachable
     }
 
-    return decoded.user
+    let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+    guard (200..<300).contains(status) else {
+      // L'API répond 200 avec un corps vide quand il n'y a pas de session ;
+      // un 401 signifie tout autant « pas de session ».
+      if status == 401 || status == 403 { return nil }
+      throw AuthError.from(statusCode: status)
+    }
+
+    return try? JSONDecoder().decode(SessionResponse.self, from: data).user
   }
 
   public func signOut() async {
@@ -106,7 +115,10 @@ public actor InMemoryAuthClient: AuthClient {
     return signedIn
   }
 
-  public func currentUser() async -> AuthenticatedUser? { user }
+  public func currentUser() async throws(AuthError) -> AuthenticatedUser? {
+    if let failure { throw failure }
+    return user
+  }
 
   public func signOut() async { user = nil }
 }
