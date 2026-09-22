@@ -1,9 +1,16 @@
+import { createRequire } from "node:module";
+
 import babelParser from "@babel/eslint-parser";
 import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import turboPlugin from "eslint-plugin-turbo";
 import onlyWarn from "eslint-plugin-only-warn";
 import globals from "globals";
+
+// Les presets Babel sont resolus depuis les `node_modules` du fichier linte,
+// pas depuis ceux de ce package. Sous pnpm, `apps/api` n'a aucun acces a
+// `@babel/preset-typescript` : on passe donc un chemin absolu.
+export const typescriptPreset = createRequire(import.meta.url).resolve("@babel/preset-typescript");
 
 /**
  * A shared ESLint configuration for the repository.
@@ -22,7 +29,7 @@ export const config = [
       parserOptions: {
         requireConfigFile: false,
         babelOptions: {
-          presets: ["@babel/preset-typescript"],
+          presets: [typescriptPreset],
         },
       },
       globals: {

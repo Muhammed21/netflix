@@ -1,4 +1,4 @@
-import { config as baseConfig } from "./base.js";
+import { config as baseConfig, typescriptPreset } from "./base.js";
 
 /**
  * Configuration ESLint pour les applications NestJS.
@@ -17,7 +17,7 @@ export const config = [
     languageOptions: {
       parserOptions: {
         babelOptions: {
-          presets: ["@babel/preset-typescript"],
+          presets: [typescriptPreset],
           parserOpts: {
             plugins: ["decorators-legacy"],
           },

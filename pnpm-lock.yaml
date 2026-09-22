@@ -163,7 +163,7 @@ importers:
         version: 5.0.1(@types/node@26.6.2)(vite@8.3.0(@types/node@26.6.2)(jiti@2.6.1)(yaml@2.9.1))
 
   packages/eslint-config:
-    devDependencies:
+    dependencies:
       '@babel/core':
         specifier: 8.0.1
         version: 8.0.1
@@ -173,6 +173,7 @@ importers:
       '@babel/preset-typescript':
         specifier: 8.0.1
         version: 8.0.1(@babel/core@8.0.1)
+    devDependencies:
       '@eslint/js':
         specifier: 10.0.1
         version: 10.0.1(eslint@10.9.1(jiti@2.6.1)(supports-color@10.2.2))
