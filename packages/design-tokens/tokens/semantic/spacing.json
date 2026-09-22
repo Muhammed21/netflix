@@ -1,0 +1,14 @@
+{
+  "spacing": {
+    "none": { "$type": "dimension", "$value": "{core.dimension.0}" },
+    "xs": { "$type": "dimension", "$value": "{core.dimension.50}" },
+    "sm": { "$type": "dimension", "$value": "{core.dimension.100}" },
+    "md": { "$type": "dimension", "$value": "{core.dimension.200}" },
+    "lg": { "$type": "dimension", "$value": "{core.dimension.300}" },
+    "xl": { "$type": "dimension", "$value": "{core.dimension.400}" }
+  },
+  "radius": {
+    "sm": { "$type": "dimension", "$value": "{core.dimension.50}" },
+    "md": { "$type": "dimension", "$value": "{core.dimension.100}" }
+  }
+}

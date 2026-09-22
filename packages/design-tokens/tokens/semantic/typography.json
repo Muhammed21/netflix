@@ -1,0 +1,31 @@
+{
+  "typography": {
+    "bodyRegular": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{core.font.family.sans}",
+        "fontSize": "{core.font.size.200}",
+        "fontWeight": "{core.font.weight.regular}",
+        "lineHeight": "{core.font.lineHeight.200}"
+      }
+    },
+    "captionMedium": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{core.font.family.sans}",
+        "fontSize": "{core.font.size.100}",
+        "fontWeight": "{core.font.weight.medium}",
+        "lineHeight": "{core.font.lineHeight.100}"
+      }
+    },
+    "titleBold": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{core.font.family.sans}",
+        "fontSize": "{core.font.size.400}",
+        "fontWeight": "{core.font.weight.bold}",
+        "lineHeight": "{core.font.lineHeight.400}"
+      }
+    }
+  }
+}

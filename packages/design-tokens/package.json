@@ -1,0 +1,24 @@
+{
+  "name": "@repo/design-tokens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "node ./scripts/build.ts",
+    "tokens:check": "node ./scripts/check-generated.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint . --max-warnings=0",
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^26.6.2",
+    "eslint": "10.9.1",
+    "style-dictionary": "5.5.5",
+    "typescript": "7.0.2",
+    "vitest": "5.0.1"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "color": {
+    "background": {
+      "primary": { "$type": "color", "$value": "{core.color.neutral.10}" },
+      "elevated": { "$type": "color", "$value": "{core.color.neutral.0}" },
+      "scrim": { "$type": "color", "$value": "{core.color.transparent.scrim}" }
+    },
+    "text": {
+      "primary": { "$type": "color", "$value": "{core.color.neutral.100}" },
+      "secondary": { "$type": "color", "$value": "{core.color.neutral.60}" }
+    },
+    "action": {
+      "primary": { "$type": "color", "$value": "{core.color.red.60}" },
+      "primaryPressed": { "$type": "color", "$value": "{core.color.red.70}" }
+    }
+  }
+}

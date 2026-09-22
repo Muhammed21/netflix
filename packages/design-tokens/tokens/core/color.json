@@ -1,0 +1,27 @@
+{
+  "core": {
+    "color": {
+      "red": {
+        "60": {
+          "$type": "color",
+          "$value": "#e50914",
+          "$description": "Rouge de marque primaire."
+        },
+        "70": { "$type": "color", "$value": "#b20710" }
+      },
+      "neutral": {
+        "0": { "$type": "color", "$value": "#000000" },
+        "10": { "$type": "color", "$value": "#141414" },
+        "60": { "$type": "color", "$value": "#808080" },
+        "100": { "$type": "color", "$value": "#ffffff" }
+      },
+      "transparent": {
+        "scrim": {
+          "$type": "color",
+          "$value": "#00000099",
+          "$description": "Noir a 60% d'opacite."
+        }
+      }
+    }
+  }
+}
