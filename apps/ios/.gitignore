@@ -1,0 +1,10 @@
+# État local d'Xcode : positions de fenêtres, points d'arrêt, onglets ouverts.
+# Change à chaque ouverture du projet et n'a aucun sens partagé.
+xcuserdata/
+*.xcuserstate
+
+# Build
+build/
+DerivedData/
+.swiftpm/
+Packages/*/.build/
