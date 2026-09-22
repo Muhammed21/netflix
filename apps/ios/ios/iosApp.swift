@@ -7,7 +7,7 @@ struct iosApp: App {
 
   var body: some Scene {
     WindowGroup {
-      RootView(storage: storage)
+      RootView(storage: storage, client: AppEnvironment.authClient)
     }
   }
 }

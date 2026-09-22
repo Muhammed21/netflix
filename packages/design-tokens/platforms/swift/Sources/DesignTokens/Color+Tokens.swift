@@ -10,6 +10,8 @@ public extension Color {
     static let backgroundMuted = Color(.sRGB, red: 0.306, green: 0.29, blue: 0.29, opacity: 1)
     static let backgroundPlaceholder = Color(.sRGB, red: 0.769, green: 0.769, blue: 0.769, opacity: 1)
     static let backgroundInverse = Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 1)
+    static let backgroundAuthGradientStart = Color(.sRGB, red: 0.18, green: 0.071, blue: 0.082, opacity: 1)
+    static let backgroundAuthGradientEnd = Color(.sRGB, red: 0.024, green: 0.004, blue: 0.008, opacity: 1)
     static let textPrimary = Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 1)
     static let textSecondary = Color(.sRGB, red: 0.549, green: 0.529, blue: 0.529, opacity: 1)
     static let textPlaceholder = Color(.sRGB, red: 0.769, green: 0.769, blue: 0.769, opacity: 1)
@@ -23,4 +25,6 @@ public extension Color {
     static let actionLink = Color(.sRGB, red: 0, green: 0.443, blue: 0.922, opacity: 1)
     static let brandNetflix = Color(.sRGB, red: 0.898, green: 0.035, blue: 0.078, opacity: 1)
     static let brandFacebook = Color(.sRGB, red: 0.224, green: 0.318, blue: 0.522, opacity: 1)
+    static let surfaceField = Color(.sRGB, red: 0.106, green: 0.082, blue: 0.09, opacity: 1)
+    static let borderField = Color(.sRGB, red: 0.133, green: 0.118, blue: 0.118, opacity: 1)
 }

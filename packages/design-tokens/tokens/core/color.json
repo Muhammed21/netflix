@@ -7,10 +7,25 @@
           "$value": "#000000",
           "$description": "Fond des écrans et des barres. 56 usages dans le fichier Figma."
         },
+        "5": {
+          "$type": "color",
+          "$value": "#060102",
+          "$description": "Bas du dégradé de l'écran de connexion. Mesuré sur la maquette de l'écran de connexion, pas extrait du fichier Figma."
+        },
         "10": {
           "$type": "color",
           "$value": "#121212",
           "$description": "Surfaces surélevées : cartes, rangées. 30 usages."
+        },
+        "15": {
+          "$type": "color",
+          "$value": "#1b1517",
+          "$description": "Intérieur des champs de saisie. Mesuré sur la maquette de l'écran de connexion, pas extrait du fichier Figma."
+        },
+        "20": {
+          "$type": "color",
+          "$value": "#221e1e",
+          "$description": "Bordure des champs de saisie. Mesuré sur la maquette de l'écran de connexion, pas extrait du fichier Figma."
         },
         "30": {
           "$type": "color",
@@ -32,7 +47,10 @@
           "$value": "#c4c4c4",
           "$description": "Gris clair : champs de recherche, placeholders. 24 usages."
         },
-        "90": { "$type": "color", "$value": "#e0e0e0" },
+        "90": {
+          "$type": "color",
+          "$value": "#e0e0e0"
+        },
         "100": {
           "$type": "color",
           "$value": "#ffffff",
@@ -40,10 +58,22 @@
         }
       },
       "whiteAlpha": {
-        "93": { "$type": "color", "$value": "#ffffffed" },
-        "83": { "$type": "color", "$value": "#ffffffd4" },
-        "69": { "$type": "color", "$value": "#ffffffb0" },
-        "48": { "$type": "color", "$value": "#ffffff7a" }
+        "93": {
+          "$type": "color",
+          "$value": "#ffffffed"
+        },
+        "83": {
+          "$type": "color",
+          "$value": "#ffffffd4"
+        },
+        "69": {
+          "$type": "color",
+          "$value": "#ffffffb0"
+        },
+        "48": {
+          "$type": "color",
+          "$value": "#ffffff7a"
+        }
       },
       "red": {
         "50": {
@@ -72,6 +102,13 @@
           "$type": "color",
           "$value": "#395185",
           "$description": "Bleu de marque Facebook, écran de partage."
+        }
+      },
+      "maroon": {
+        "20": {
+          "$type": "color",
+          "$value": "#2e1215",
+          "$description": "Haut du dégradé de l'écran de connexion. Mesuré sur la maquette de l'écran de connexion, pas extrait du fichier Figma."
         }
       }
     }

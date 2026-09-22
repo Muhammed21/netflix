@@ -1,31 +1,108 @@
 {
   "color": {
     "background": {
-      "primary": { "$type": "color", "$value": "{core.color.neutral.0}" },
-      "elevated": { "$type": "color", "$value": "{core.color.neutral.10}" },
-      "subtle": { "$type": "color", "$value": "{core.color.neutral.30}" },
-      "muted": { "$type": "color", "$value": "{core.color.neutral.35}" },
-      "placeholder": { "$type": "color", "$value": "{core.color.neutral.80}" },
-      "inverse": { "$type": "color", "$value": "{core.color.neutral.100}" }
+      "primary": {
+        "$type": "color",
+        "$value": "{core.color.neutral.0}"
+      },
+      "elevated": {
+        "$type": "color",
+        "$value": "{core.color.neutral.10}"
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{core.color.neutral.30}"
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{core.color.neutral.35}"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{core.color.neutral.80}"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{core.color.neutral.100}"
+      },
+      "authGradientStart": {
+        "$type": "color",
+        "$value": "{core.color.maroon.20}"
+      },
+      "authGradientEnd": {
+        "$type": "color",
+        "$value": "{core.color.neutral.5}"
+      }
     },
     "text": {
-      "primary": { "$type": "color", "$value": "{core.color.neutral.100}" },
-      "secondary": { "$type": "color", "$value": "{core.color.neutral.60}" },
-      "placeholder": { "$type": "color", "$value": "{core.color.neutral.80}" },
-      "onInverse": { "$type": "color", "$value": "{core.color.neutral.0}" },
-      "emphasisHigh": { "$type": "color", "$value": "{core.color.whiteAlpha.93}" },
-      "emphasisMedium": { "$type": "color", "$value": "{core.color.whiteAlpha.83}" },
-      "emphasisLow": { "$type": "color", "$value": "{core.color.whiteAlpha.69}" },
-      "emphasisFaint": { "$type": "color", "$value": "{core.color.whiteAlpha.48}" }
+      "primary": {
+        "$type": "color",
+        "$value": "{core.color.neutral.100}"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{core.color.neutral.60}"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{core.color.neutral.80}"
+      },
+      "onInverse": {
+        "$type": "color",
+        "$value": "{core.color.neutral.0}"
+      },
+      "emphasisHigh": {
+        "$type": "color",
+        "$value": "{core.color.whiteAlpha.93}"
+      },
+      "emphasisMedium": {
+        "$type": "color",
+        "$value": "{core.color.whiteAlpha.83}"
+      },
+      "emphasisLow": {
+        "$type": "color",
+        "$value": "{core.color.whiteAlpha.69}"
+      },
+      "emphasisFaint": {
+        "$type": "color",
+        "$value": "{core.color.whiteAlpha.48}"
+      }
     },
     "action": {
-      "primary": { "$type": "color", "$value": "{core.color.red.60}" },
-      "primaryPressed": { "$type": "color", "$value": "{core.color.red.70}" },
-      "link": { "$type": "color", "$value": "{core.color.blue.50}" }
+      "primary": {
+        "$type": "color",
+        "$value": "{core.color.red.60}"
+      },
+      "primaryPressed": {
+        "$type": "color",
+        "$value": "{core.color.red.70}"
+      },
+      "link": {
+        "$type": "color",
+        "$value": "{core.color.blue.50}"
+      }
     },
     "brand": {
-      "netflix": { "$type": "color", "$value": "{core.color.red.60}" },
-      "facebook": { "$type": "color", "$value": "{core.color.blue.70}" }
+      "netflix": {
+        "$type": "color",
+        "$value": "{core.color.red.60}"
+      },
+      "facebook": {
+        "$type": "color",
+        "$value": "{core.color.blue.70}"
+      }
+    },
+    "surface": {
+      "field": {
+        "$type": "color",
+        "$value": "{core.color.neutral.15}"
+      }
+    },
+    "border": {
+      "field": {
+        "$type": "color",
+        "$value": "{core.color.neutral.20}"
+      }
     }
   }
 }

@@ -1,16 +1,19 @@
 import AppCore
 import SwiftUI
 
-/// Enchaîne splash → onboarding → accueil. L'onboarding est sauté d'emblée
-/// s'il a déjà été complété : c'est le seul endroit qui décide du parcours.
+/// Enchaîne splash → onboarding → connexion → accueil. Seul endroit qui décide
+/// du parcours : l'onboarding est sauté s'il a déjà été vu, et la connexion
+/// l'est si une session valide subsiste.
 struct RootView: View {
   private enum Step: Equatable {
     case splash
     case onboarding
-    case home
+    case signIn
+    case home(AuthenticatedUser)
   }
 
   let storage: OnboardingStorage
+  let client: AuthClient
 
   @State private var step: Step = .splash
 
@@ -23,8 +26,10 @@ struct RootView: View {
         SplashView(onFinished: finishSplash)
       case .onboarding:
         OnboardingView(onFinish: completeOnboarding)
-      case .home:
-        HomePlaceholderView()
+      case .signIn:
+        SignInView(client: client, onSignedIn: { step = .home($0) })
+      case .home(let user):
+        HomePlaceholderView(user: user)
       }
     }
     .animation(.easeInOut(duration: 0.4), value: step)
@@ -32,19 +37,38 @@ struct RootView: View {
 
   private func finishSplash() {
     guard step == .splash else { return }
-    step = storage.hasCompletedOnboarding ? .home : .onboarding
+    guard storage.hasCompletedOnboarding else {
+      step = .onboarding
+      return
+    }
+    Task { await resolveSession() }
   }
 
   private func completeOnboarding() {
     storage.markOnboardingCompleted()
-    step = .home
+    Task { await resolveSession() }
+  }
+
+  /// Le cookie de session est conservé par URLSession entre les lancements ;
+  /// on demande au serveur s'il tient toujours plutôt que de le supposer.
+  private func resolveSession() async {
+    if let user = await client.currentUser() {
+      step = .home(user)
+    } else {
+      step = .signIn
+    }
   }
 }
 
 #Preview("Premier lancement") {
-  RootView(storage: InMemoryOnboardingStorage())
+  RootView(storage: InMemoryOnboardingStorage(), client: InMemoryAuthClient())
 }
 
-#Preview("Onboarding déjà vu") {
-  RootView(storage: InMemoryOnboardingStorage(hasCompletedOnboarding: true))
+#Preview("Session active") {
+  RootView(
+    storage: InMemoryOnboardingStorage(hasCompletedOnboarding: true),
+    client: InMemoryAuthClient(
+      signedInAs: AuthenticatedUser(id: "1", email: "viewer@netflix.test", name: "Viewer")
+    )
+  )
 }

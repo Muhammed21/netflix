@@ -1,9 +1,12 @@
+import AppCore
 import DesignTokens
 import SwiftUI
 
-/// Accueil provisoire : matérialise la fin du parcours d'onboarding en
-/// attendant l'écran d'accueil réel.
+/// Accueil provisoire : matérialise la fin du parcours en attendant l'écran
+/// d'accueil réel.
 struct HomePlaceholderView: View {
+  let user: AuthenticatedUser
+
   var body: some View {
     ZStack {
       Color.backgroundPrimary
@@ -13,7 +16,7 @@ struct HomePlaceholderView: View {
         Text("Accueil")
           .font(.screenTitle)
           .foregroundStyle(Color.textPrimary)
-        Text("À construire")
+        Text(user.email)
           .font(.metadata)
           .foregroundStyle(Color.textSecondary)
       }
@@ -22,5 +25,7 @@ struct HomePlaceholderView: View {
 }
 
 #Preview {
-  HomePlaceholderView()
+  HomePlaceholderView(
+    user: AuthenticatedUser(id: "1", email: "viewer@netflix.test", name: "Viewer")
+  )
 }
